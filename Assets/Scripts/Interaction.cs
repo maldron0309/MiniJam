@@ -59,7 +59,11 @@ public class Interaction : MonoBehaviour
     private void InteractWithHarpoon(GameObject harpoon)
     {
         Debug.Log("Interacting with Harpoon");
-        // Add your logic to interact with the harpoon here
+        Harpoon harpoonScript = harpoon.GetComponent<Harpoon>();
+        if (harpoonScript != null)
+        {
+            harpoonScript.LowerHarpoon();
+        }
     }
 
     private void OnDrawGizmosSelected()

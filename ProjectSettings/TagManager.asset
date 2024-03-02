@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FishBox
   - Harpoon
+  - Fish
   layers:
   - Default
   - TransparentFX

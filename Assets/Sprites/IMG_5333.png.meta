@@ -126,9 +126,9 @@ TextureImporter:
       name: IMG_5333_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 33
         y: 82
-        width: 19
+        width: 22
         height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -147,10 +147,10 @@ TextureImporter:
       name: IMG_5333_3
       rect:
         serializedVersion: 2
-        x: 37
-        y: 15
-        width: 20
-        height: 63
+        x: 36
+        y: 16
+        width: 22
+        height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

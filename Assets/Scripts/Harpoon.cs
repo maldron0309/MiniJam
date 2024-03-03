@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Harpoon : MonoBehaviour
 {
-    [SerializeField] private GameObject fish; 
+    [SerializeField] private GameObject fish;
     private Animator anim;
+
+    [SerializeField] HarpoonBoundary harpoonBoundary;
+    [SerializeField] GameObject interactText;
 
     private void Awake()
     {
@@ -14,7 +17,16 @@ public class Harpoon : MonoBehaviour
 
     private void Update()
     {
-        LowerHarpoon();
+
+        if (harpoonBoundary.playerInBounds)
+        {
+            interactText.SetActive(true);
+        }
+        else
+        {
+            interactText.SetActive(false);
+        }
+
     }
 
     public void LowerHarpoon()

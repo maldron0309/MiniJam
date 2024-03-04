@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Harpoon : MonoBehaviour
 {
-    [SerializeField] private GameObject fish;
-    private Animator anim;
+    public Animator anim;
 
     [SerializeField] HarpoonBoundary harpoonBoundary;
     [SerializeField] GameObject interactText;
+
+    bool harpoonLowered = false;
+
+    public Player player;
+
+    public bool inMiniGame = false;
+
+    bool stopShowingText = false;
 
     private void Awake()
     {
@@ -20,31 +27,55 @@ public class Harpoon : MonoBehaviour
 
         if (harpoonBoundary.playerInBounds)
         {
-            interactText.SetActive(true);
+            if (!stopShowingText)
+            {
+                interactText.SetActive(true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && !harpoonLowered && !GameManager.instance.holdingFish && !inMiniGame)
+            {
+                interactText.SetActive(false);
+                stopShowingText = true;
+                StartCoroutine(LowerHarpoon());
+            }
+
         }
         else
         {
+            stopShowingText = false;
             interactText.SetActive(false);
         }
 
+
     }
 
-    public void LowerHarpoon()
+    IEnumerator LowerHarpoon()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Lowering Harpoon");
-            anim.SetTrigger("Lower");
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("Fish caught!");
-            anim.SetTrigger("Caught");
+        harpoonLowered = true;
+        player.enabled = false;
+        player.GetComponentInChildren<Animator>().SetBool("isWalking", false);
+        // freeze player in place
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        // player.GetComponent<Rigidbody2D>().isKinematic = true;
+        anim.SetBool("Lowered", true);
+        yield return new WaitForSeconds(1.5f);
+        // unfreeze player
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        player.enabled = true;
+        // player.GetComponent<Rigidbody2D>().isKinematic = false;
+        anim.SetBool("Lowered", false);
+        harpoonLowered = false;
+    }
 
-            if (Vector3.Distance(transform.position, fish.transform.position) < 0.1f)
-            {
-                Debug.Log("Fish");
-            }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Fish"))
+        {
+            StopAllCoroutines();
+            GameManager.instance.FishCaught();
+            harpoonLowered = false;
+            inMiniGame = true;
         }
     }
+
 }

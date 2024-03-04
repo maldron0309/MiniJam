@@ -17,12 +17,12 @@ public class Minigame : MonoBehaviour
     [SerializeField] GameObject barB;
     [SerializeField] GameObject barC;
 
-    [SerializeField] int rounds = 1;
+    public int rounds = 1;
 
 
     void Start()
     {
-        SelectNewBar();
+        StartCoroutine(SelectNewBar());
     }
 
 
@@ -41,7 +41,7 @@ public class Minigame : MonoBehaviour
         barCActive = !barCActive;
     }
 
-    void SelectNewBar()
+    IEnumerator SelectNewBar()
     {
         barASelected = false;
         barBSelected = false;
@@ -49,6 +49,8 @@ public class Minigame : MonoBehaviour
         barA.SetActive(false);
         barB.SetActive(false);
         barC.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
 
         int randomBar = Random.Range(0, 3);
         switch (randomBar)
@@ -78,7 +80,7 @@ public class Minigame : MonoBehaviour
                 rounds--;
                 if (rounds > 0)
                 {
-                    SelectNewBar();
+                    StartCoroutine(SelectNewBar());
                 }
             }
             else if (barBActive && barBSelected)
@@ -87,7 +89,7 @@ public class Minigame : MonoBehaviour
                 rounds--;
                 if (rounds > 0)
                 {
-                    SelectNewBar();
+                    StartCoroutine(SelectNewBar());
                 }
             }
             else if (barCActive && barCSelected)
@@ -96,7 +98,7 @@ public class Minigame : MonoBehaviour
                 rounds--;
                 if (rounds > 0)
                 {
-                    SelectNewBar();
+                    StartCoroutine(SelectNewBar());
                 }
             }
             else
@@ -106,7 +108,7 @@ public class Minigame : MonoBehaviour
         }
         if (rounds == 0)
         {
-            // TODO: Handle win
+            GameManager.instance.FinishedMinigame();
             GameObject.Destroy(this.gameObject);
         }
     }

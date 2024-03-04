@@ -7,11 +7,12 @@ public class Chest : MonoBehaviour
 
     public GameObject chestText;
     bool playerAtChest = false;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,6 +21,7 @@ public class Chest : MonoBehaviour
         if (playerAtChest && GameManager.instance.holdingFish && Input.GetKeyDown(KeyCode.Space))
         {
             chestText.SetActive(false);
+            audioSource.Play();
             GameManager.instance.holdingFish = false;
             if (GameManager.instance.stage != 7)
             {

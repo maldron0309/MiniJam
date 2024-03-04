@@ -7,9 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public AudioClip lastSound;
+    public AudioSource winMiniGameSound;
     AudioSource audioSource;
 
-    public Animator anim;
     public bool fishCaught = false;
 
     public Transform minigameSpawnPoint;
@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
         fishManager.SetActive(false);
         fishInfo[stage].SetActive(true);
         showingCard = true;
+        winMiniGameSound.Play();
         if (stage == 6)
         {
             EndGame();

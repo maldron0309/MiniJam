@@ -9,6 +9,8 @@ public class Harpoon : MonoBehaviour
     [SerializeField] HarpoonBoundary harpoonBoundary;
     [SerializeField] GameObject interactText;
 
+    AudioSource audioSource;
+
     bool harpoonLowered = false;
 
     public Player player;
@@ -20,6 +22,7 @@ public class Harpoon : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -37,6 +40,7 @@ public class Harpoon : MonoBehaviour
                 interactText.SetActive(false);
                 stopShowingText = true;
                 StartCoroutine(LowerHarpoon());
+                audioSource.Play();
             }
 
         }

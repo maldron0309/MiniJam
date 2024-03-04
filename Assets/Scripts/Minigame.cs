@@ -17,12 +17,17 @@ public class Minigame : MonoBehaviour
     [SerializeField] GameObject barB;
     [SerializeField] GameObject barC;
 
+    [SerializeField] AudioClip correctSound;
+    [SerializeField] AudioClip wrongSound;
+    AudioSource audioSource;
+
     public int rounds = 1;
 
 
     void Start()
     {
         StartCoroutine(SelectNewBar());
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -76,34 +81,42 @@ public class Minigame : MonoBehaviour
         {
             if (barAActive && barASelected)
             {
-                Debug.Log("Correct A");
+                // Debug.Log("Correct A");
                 rounds--;
                 if (rounds > 0)
                 {
                     StartCoroutine(SelectNewBar());
                 }
+                audioSource.clip = correctSound;
+                audioSource.Play();
             }
             else if (barBActive && barBSelected)
             {
-                Debug.Log("Correct B");
+                // Debug.Log("Correct B");
                 rounds--;
                 if (rounds > 0)
                 {
                     StartCoroutine(SelectNewBar());
                 }
+                audioSource.clip = correctSound;
+                audioSource.Play();
             }
             else if (barCActive && barCSelected)
             {
-                Debug.Log("Correct C");
+                // Debug.Log("Correct C");
                 rounds--;
                 if (rounds > 0)
                 {
                     StartCoroutine(SelectNewBar());
                 }
+                audioSource.clip = correctSound;
+                audioSource.Play();
             }
             else
             {
-                Debug.Log("Wrong");
+                // Debug.Log("Wrong");
+                audioSource.clip = wrongSound;
+                audioSource.Play();
             }
         }
         if (rounds == 0)

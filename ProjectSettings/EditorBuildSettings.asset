@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: c62fe00863bbe8a40b5418681352e56b
   - enabled: 1
-    path: Assets/Scenes/TempScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Credits.unity
+    guid: e742da9e301509b4dae5e569269a81e5
   m_configObjects: {}

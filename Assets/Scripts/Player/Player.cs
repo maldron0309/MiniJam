@@ -11,10 +11,14 @@ public class Player : MonoBehaviour
     Animator anim;
 
     [SerializeField] float speed = 5f;
+
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+
     }
 
     void Update()
@@ -51,5 +55,7 @@ public class Player : MonoBehaviour
     {
         return Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
     }
+
+
 
 }

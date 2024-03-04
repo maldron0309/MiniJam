@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public AudioClip lastSound;
     public AudioSource winMiniGameSound;
     AudioSource audioSource;
+    public AudioSource stringsAudioSource;
 
     public bool fishCaught = false;
 
@@ -165,6 +166,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(10);
         finalShadow.SetActive(true);
         yield return new WaitForSeconds(14);
+        stringsAudioSource.Play();
         endGameScreen.SetActive(true);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Credits");

@@ -5,8 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public LevelLoader levelLoader;
+
     public void StartGame()
     {
-        SceneManager.LoadScene("Main");
+        // StartCoroutine(StartGameWait());
+        levelLoader.FadeToNextLevel();
     }
+
+    // IEnumerator StartGameWait()
+    // {
+    //     yield return new WaitForSeconds(1);
+    //     SceneManager.LoadScene("Main");
+    // }
 }
